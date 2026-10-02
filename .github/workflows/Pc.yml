@@ -1,0 +1,22 @@
+name: PC Virtual
+
+on:
+  workflow_dispatch:
+
+jobs:
+  teste:
+    runs-on: windows-latest
+
+    steps:
+      - name: Verificar computador
+        shell: powershell
+        run: |
+          Write-Host "PC virtual iniciado!"
+          Get-CimInstance Win32_OperatingSystem |
+            Select-Object Caption, OSArchitecture
+
+      - name: Verificar GPU
+        shell: powershell
+        run: |
+          Get-CimInstance Win32_VideoController |
+            Select-Object Name, AdapterRAM
